@@ -22,7 +22,11 @@
     let form = document.querySelector(".addMovie__form");
     let fd = new FormData(form);
     let res = await DataMovie.update(fd);
-    V.renderLog(res);
+    if (res) {
+        V.renderLog("Film ajouté avec succès !");
+    } else {
+        V.renderLog("Erreur lors de l'ajout du film.");
+      }
   }
 
 
