@@ -25,21 +25,21 @@ function readMovieController(){
     return $movies;
 }
 
-function updateController() {
-    header('Content-Type: application/json');
-    echo json_encode($_REQUEST);
-    exit();
-    $name = $_REQUEST['name'];
-    $year = $_REQUEST['year'];
-    $length = $_REQUEST['length'];
-    $description = $_REQUEST['description'];
-    $director = $_REQUEST['director'];
-    $id_category = $_REQUEST['id_category'];
-    $image = $_REQUEST['image'];
-    $trailer = $_REQUEST['trailer'];
-    $min_age = $_REQUEST['min_age'];
+function addController() {
+    $name = $_REQUEST['name']?? null;
+    $year = $_REQUEST['year']?? null;
+    $length = $_REQUEST['length']?? null;
+    $description = $_REQUEST['description']?? null;
+    $director = $_REQUEST['director']?? null;
+    $id_category = $_REQUEST['id_category']?? null;
+    $image = $_REQUEST['image']?? null;
+    $trailer = $_REQUEST['trailer']?? null;
+    $min_age = $_REQUEST['min_age']?? null;
 
-    $ok = updateMenu($name, $year, $length, $description,$director, $id_category, $image, $trailer, $min_age);
+    if (empty($name) || empty($director) || empty($year) || empty($length) || empty($description) || empty($id_category) || empty($image) || empty($trailer) || empty($min_age)) {
+        return "Erreur : Tous les champs doivent être remplis.";
+    }
+    $ok = addMovie($name, $year, $length, $description,$director, $id_category, $image, $trailer, $min_age);
     // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
     if ($ok!=0){
       return "le film $name a été ajouté";

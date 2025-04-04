@@ -18,10 +18,10 @@
     import { DataMovie } from "./data/dataMovie.js";
     window.C = {};
 
-    C.handlerUpdate = async function () {
+    C.handlerAdd = async function () {
     let form = document.querySelector(".addMovie__form");
     let fd = new FormData(form);
-    let res = await DataMovie.update(fd);
+    let res = await DataMovie.add(fd);
     if (res) {
         V.renderLog("Film ajouté avec succès !");
     } else {
@@ -32,7 +32,7 @@
 
     C.start = function () {
       V.renderLog("Démarrage de l'application");
-      V.renderNewMovieForm("C.handlerUpdate()");
+      V.renderNewMovieForm("C.handlerAdd()");
     };
 
     window.V = {};

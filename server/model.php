@@ -41,7 +41,7 @@ function getMovie(){
  *
  * @return int Nombre de lignes affectées par l'insertion.
  */
-function updateMovie($name, $director, $year, $length, $description, $id_category, $image ,$trailer, $min_age){
+function addMovie($name, $director, $year, $length, $description, $id_category, $image ,$trailer, $min_age){
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
         $sql = "INSERT INTO Movie (name,year, length, description, director, id_category, image, trailer, min_age) 
                 VALUES (:name,:year,:length,:description,:director,:id_category,:image, :trailer,:min_age)";
