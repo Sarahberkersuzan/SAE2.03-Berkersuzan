@@ -1,0 +1,26 @@
+.addMovies__form {
+    display: flex;
+    flex-direction: column; /* Aligne les enfants verticalement */
+    align-items: left;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.addMovies__form input {
+    margin-bottom: 1rem; 
+    width: 50%; 
+    box-sizing: border-box; 
+    padding: 0.5rem;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    font-size: 1rem;
+    transition: border-color 0.3s; 
+
+}
+.ajouters__container {
+    display: flex;
+    flex-direction: column; /* Aligne les enfants verticalement */
+    align-items: left;
+    justify-content: center;
+    padding: 1rem;
+}

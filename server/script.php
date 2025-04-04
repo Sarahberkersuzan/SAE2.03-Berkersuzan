@@ -52,6 +52,10 @@ if ( isset($_REQUEST['todo']) ){
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
+    case 'addmovies':
+      $data = addController(); 
+      break;
+
     case 'readmovies': 
       $data = readMovieController(); 
       break;
@@ -97,7 +101,6 @@ if ( isset($_REQUEST['todo']) ){
  * HTTP 404 (Not found), indiquant que la requête HTTP ne correspond à rien.
  */
 http_response_code(404); // 404 == "Not found"
-
 
 
 ?>
