@@ -10,29 +10,39 @@
 
 <body>
   <section id="log"></section>
-  <section id="addMovie"></section>
+  <section id="content"></section>
 
   <script type="module">
     import { Log } from "./component/Log/script.js";
-    import { NewMovieForm } from "./component/NewMovieForm/script.js";
+    import { MovieForm } from "./component/MovieForm/script.js";
     import { DataMovie } from "./data/dataMovie.js";
     window.C = {};
 
-    C.handlerAdd = async function () {
+  C.handlerAddMovie = async function () {
     let form = document.querySelector(".addMovie__form");
     let fd = new FormData(form);
-    let res = await DataMovie.add(fd);
-    if (res) {
-        V.renderLog("Film ajouté avec succès !");
-    } else {
-        V.renderLog("Erreur lors de l'ajout du film.");
+    let isEmpty = false;
+    form.querySelectorAll("input").forEach((input) => {
+      if (!input.value.trim()) {
+        isEmpty = true;
       }
+    });
+    if (isEmpty) {
+      V.renderLog("Veuillez remplir tous les champs");
+      return;
+    }
+    let res = await DataMovie.addMovie(fd);
+    if (res.success){
+      V.renderLog("Le film a été ajouté avec succès");
+    } else {
+      V.renderLog("Erreur lors de l'ajout du film");
+    }
   }
 
 
     C.start = function () {
       V.renderLog("Démarrage de l'application");
-      V.renderNewMovieForm("C.handlerAdd()");
+      V.renderForm("C.handlerAddMovie()");
     };
 
     window.V = {};
@@ -42,9 +52,9 @@
       content.innerHTML = Log.format(txt);
     };
 
-    V.renderNewMovieForm = function (handler) {
-      let content = document.querySelector("#addMovie");
-      content.innerHTML = NewMovieForm.format(handler);
+    V.renderForm = function (handler) {
+      let content = document.querySelector("#content");
+      content.innerHTML = MovieForm.format(handler);
     };
 
     C.start();

@@ -5,4 +5,4 @@
 @import "./utilities.css" layer(utilities);
 
 @import "../component/Log/style.css" layer(components);
-@import "../component/NewMovieForm/movieform.css" layer(components);
+@import "../component/MovieForm/movieform.css" layer(components);

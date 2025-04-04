@@ -1,14 +1,9 @@
-let HOST_URL = "https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/";
+let HOST_URL = "https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan";
 
 let DataMovie = {};
 
- DataMovie.request = async function(){
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=readmovies" );
-    let data = await answer.json();
-    return data;
-}
 
-/** DataMovie.update
+/** DataMovie.add
  * 
  * Prend en paramètre un objet FormData (données de formulaire) à envoyer au serveur.
  * Ces données sont incluses dans une requête HTTP en méthode POST.
@@ -21,7 +16,7 @@ let DataMovie = {};
  * @param {*} fdata un objet FormData contenant les données du formulaire à envoyer au serveur.
  * @returns la réponse du serveur.
  */
-DataMovie.add= async function (fdata) {
+DataMovie.addMovie= async function (fdata) {
     // fetch possède un deuxième paramètre (optionnel) qui est un objet de configuration de la requête HTTP:
     //  - method : la méthode HTTP à utiliser (GET, POST...)
     //  - body : les données à envoyer au serveur (sous forme d'objet FormData ou bien d'une chaîne de caractères, par exempe JSON)
@@ -31,18 +26,8 @@ DataMovie.add= async function (fdata) {
     };
 
     let answer = await fetch(HOST_URL + "/server/script.php?todo=addMovie", config);
-    let text = await answer.text(); // on récupère la réponse du serveur sous forme de texte brut
-    console.log("Réponse brute du serveur:", text);
-
-    try {
-        let data = JSON.parse(text);  // Parser manuellement pour voir l'erreur
-        return data;
-    } catch (error) {
-        console.error("Erreur de parsing JSON:", error);
-        return null;
-    }
+    let data = await answer.json(); // on récupère la réponse du serveur sous forme de JSON
+    return data; // on retourne la réponse du serveur
 }
-
-
 
 export {DataMovie};

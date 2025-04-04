@@ -18,7 +18,7 @@ define("DBNAME", "berkersuzan1");
 define("DBLOGIN", "berkersuzan1");
 define("DBPWD", "berkersuzan1");
 
-function getMovie(){
+function getAllMovies(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "select id, name, image from Movie";
     $stmt = $cnx->prepare($sql);
@@ -41,10 +41,11 @@ function getMovie(){
  *
  * @return int Nombre de lignes affectées par l'insertion.
  */
-function addMovie($name, $director, $year, $length, $description, $id_category, $image ,$trailer, $min_age){
+function addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age) {
+
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-        $sql = "INSERT INTO Movie (name,year, length, description, director, id_category, image, trailer, min_age) 
-                VALUES (:name,:year,:length,:description,:director,:id_category,:image, :trailer,:min_age)";
+        $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
+                VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
         $stmt = $cnx->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':year', $year);
@@ -57,6 +58,6 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
         $stmt->bindParam(':min_age', $min_age);
 
         $stmt->execute();
-        $res = $stmt->rowCount();
-        return $res;
+
+        return $stmt->rowCount();
 }

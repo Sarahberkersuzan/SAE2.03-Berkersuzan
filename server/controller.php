@@ -20,32 +20,32 @@
  */
 require("model.php");
 
-function readMovieController(){
-    $movies = getMovie();
+function readMoviesController(){
+    $movies = getAllMovies();
     return $movies;
 }
 
 function addController() {
-    $name = $_REQUEST['name']?? null;
-    $year = $_REQUEST['year']?? null;
-    $length = $_REQUEST['length']?? null;
-    $description = $_REQUEST['description']?? null;
-    $director = $_REQUEST['director']?? null;
-    $id_category = $_REQUEST['id_category']?? null;
-    $image = $_REQUEST['image']?? null;
-    $trailer = $_REQUEST['trailer']?? null;
-    $min_age = $_REQUEST['min_age']?? null;
+  header('Content-Type: application/json');
 
-    if (empty($name) || empty($director) || empty($year) || empty($length) || empty($description) || empty($id_category) || empty($image) || empty($trailer) || empty($min_age)) {
-        return "Erreur : Tous les champs doivent être remplis.";
-    }
-    $ok = addMovie($name, $year, $length, $description,$director, $id_category, $image, $trailer, $min_age);
-    // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
-    if ($ok!=0){
-      return "le film $name a été ajouté";
-    }
-    else{
-      return "Erreur lors de l'ajout du film $name";
-    }
+  $name = $_REQUEST['name'];
+  $year = $_REQUEST['year'];
+  $length = $_REQUEST['length'];
+  $description = $_REQUEST['description'];
+  $director = $_REQUEST['director'];
+  $id_category = $_REQUEST['id_category'];
+  $image = $_REQUEST['image'];
+  $trailer = $_REQUEST['trailer'];
+  $min_age = $_REQUEST['min_age'];
+
+  $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age);
+
+  if ($ok != 0) {
+      echo json_encode(["success" => true, "message" => "Film ajouté à la base de donnée"]);
+  } else {
+      echo json_encode(["success" => false, "message" => "Erreur lors de l'ajout du film"]);
+  }
+
+exit();
 
 }
