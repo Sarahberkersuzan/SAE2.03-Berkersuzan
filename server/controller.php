@@ -25,22 +25,28 @@ function readMovieController(){
     return $movies;
 }
 
-function addController(){
+function updateController() {
+    header('Content-Type: application/json');
+    echo json_encode($_REQUEST);
+    exit();
     $name = $_REQUEST['name'];
-    $director = $_REQUEST['director'];
-    $year= $_REQUEST['year'];
+    $year = $_REQUEST['year'];
     $length = $_REQUEST['length'];
-    $description= $_REQUEST['description'];
+    $description = $_REQUEST['description'];
+    $director = $_REQUEST['director'];
     $id_category = $_REQUEST['id_category'];
     $image = $_REQUEST['image'];
     $trailer = $_REQUEST['trailer'];
     $min_age = $_REQUEST['min_age'];
 
-    $ok = addMovies($name, $director, $year, $length, $description, $id_category,$image ,$trailer, $min_age);
+    $ok = updateMenu($name, $year, $length, $description,$director, $id_category, $image, $trailer, $min_age);
+    // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
     if ($ok!=0){
-        return "Le film $name a bien été ajouté";
+      return "le film $name a été ajouté";
     }
     else{
-        return "Erreur lors de l'ajout du film $name";
+      return "Erreur lors de l'ajout du film $name";
     }
+
 }
+

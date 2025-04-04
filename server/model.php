@@ -41,21 +41,22 @@ function getMovie(){
  *
  * @return int Nombre de lignes affectées par l'insertion.
  */
-function addMovies($name, $director, $year, $length, $description, $id_category,$image ,$trailer, $min_age){
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age) VALUES (:name,:director,:year,:length,:description,:id_category,:image, :trailer,:min_age)";
-    $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':director', $director);
-    $stmt->bindParam(':year', $year);
-    $stmt->bindParam(':length', $length);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':id_category', $id_category);
-    $stmt->bindParam(':image', $image);
-    $stmt->bindParam(':trailer', $trailer);
-    $stmt->bindParam(':min_age', $min_age);
-    
-    $stmt->execute();
-    $res = $stmt->rowCount();
-    return $res;
+function updateMovie($name, $director, $year, $length, $description, $id_category, $image ,$trailer, $min_age){
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "INSERT INTO Movie (name,year, length, description, director, id_category, image, trailer, min_age) 
+                VALUES (:name,:year,:length,:description,:director,:id_category,:image, :trailer,:min_age)";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':year', $year);
+        $stmt->bindParam(':length', $length);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':director', $director);
+        $stmt->bindParam(':id_category', $id_category);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':trailer', $trailer);
+        $stmt->bindParam(':min_age', $min_age);
+
+        $stmt->execute();
+        $res = $stmt->rowCount();
+        return $res;
 }
