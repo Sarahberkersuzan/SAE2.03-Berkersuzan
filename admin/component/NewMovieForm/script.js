@@ -2,7 +2,7 @@ let templateFile = await fetch('./component/NewMovieForm/template.html');
 let template = await templateFile.text();
 
 
-let NewMovieForm = {};
+let NewMovieForm= {};
 
 NewMovieForm.format = function(handler){
     let html= template;

@@ -31,9 +31,16 @@ DataMovie.add= async function (fdata) {
     };
 
     let answer = await fetch(HOST_URL + "/server/script.php?todo=addMovie", config);
-    let data = await answer.json();
-    return data;
-    
+    let text = await answer.text(); // on récupère la réponse du serveur sous forme de texte brut
+    console.log("Réponse brute du serveur:", text);
+
+    try {
+        let data = JSON.parse(text);  // Parser manuellement pour voir l'erreur
+        return data;
+    } catch (error) {
+        console.error("Erreur de parsing JSON:", error);
+        return null;
+    }
 }
 
 
