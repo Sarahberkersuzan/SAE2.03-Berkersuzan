@@ -54,12 +54,16 @@ if ( isset($_REQUEST['todo']) ){
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
+    case 'detailread': // on veut afficher les détails d'un film
+      $data = detailController(); 
+      break;
+
     case 'addMovie':
       $data = addController(); 
       break;
 
     case 'readmovies': 
-      $data = readMovieController(); 
+      $data = readMoviesController(); 
       break;
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée

@@ -49,3 +49,18 @@ function addController() {
 exit();
 
 }
+
+function detailController() {
+ 
+
+  $id = $_REQUEST['id'];
+
+  $movie = detailMovie($id);
+
+  if ($movie != null) {
+      echo json_encode(["success" => true, "movie" => $movie]);
+  } else {
+      echo json_encode(["success" => false, "message" => "Erreur lors de la récupération du film"]);
+  }
+  exit();
+}

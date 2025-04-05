@@ -37,6 +37,7 @@
         let data = await DataMovie.requestMovies();
         V.renderMovie(data);
       };
+  
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -63,6 +64,13 @@
         let content = document.querySelector("#content");
         content.innerHTML = Movie.format(data);
       };
+      /**
+       * V.renderMovieDetails
+       *
+       * Cette fonction est responsable de l'affichage des détails d'un film.
+       * Elle sélectionne l'élément HTML avec l'ID "detail" et y insère le contenu
+       * formaté par le composant MovieDetail.
+       */
   
 
       C.start(); // Démarre l'application

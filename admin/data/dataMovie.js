@@ -31,3 +31,4 @@ DataMovie.addMovie= async function (fdata) {
 }
 
 export {DataMovie};
+
