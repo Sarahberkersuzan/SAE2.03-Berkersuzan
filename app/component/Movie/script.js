@@ -9,6 +9,7 @@ Movie.format = function (movies) {
     let movieHtml = template;
     movieHtml = movieHtml.replace("{{nom}}", movie.name);
     movieHtml = movieHtml.replace("{{affiche}}", movie.image);
+    movieHtml = movieHtml.replace("{{handler}}",`C.handlerDetail(${movie.id})`);
     html += movieHtml;
   });
 
