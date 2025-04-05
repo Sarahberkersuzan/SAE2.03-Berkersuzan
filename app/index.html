@@ -28,10 +28,10 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerMovies()");
-        C.getMovie();
+        C.getAllMovie();
       };
 
-      C.getMovie = async function () {
+      C.getAllMovie = async function () {
         let data = await DataMovie.requestMovies();
         V.renderMovie(data);
       };
@@ -40,7 +40,7 @@
         V.renderMovieDetail(details[0]);
       };
       C.handlerMovies = function () {
-        C.getMovie(); // Recharger la liste des films
+        C.getAllMovie(); // Recharger la liste des films
       };
   
 
@@ -54,9 +54,9 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function (handlerMovies) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(handlerMovies);
       };
       /**
        * V.renderMovie
