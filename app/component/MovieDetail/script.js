@@ -6,8 +6,8 @@ let MovieDetail = {};
 
 MovieDetail.format = function (movie) {
   let movieHtml = template;
-  // console.log(movie); // debug
-  movieHtml = movieHtml.replace("{{image}}", movie.image);
+  
+  movieHtml = movieHtml.replace("{{affiche}}", movie.image);
   movieHtml = movieHtml.replace("{{name}}", movie.name);
   movieHtml = movieHtml.replace("{{description}}", movie.description);
   movieHtml = movieHtml.replace("{{director}}", movie.director);

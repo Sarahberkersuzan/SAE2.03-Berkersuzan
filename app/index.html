@@ -36,8 +36,8 @@
         V.renderMovie(data);
       };
       C.handlerDetail = async function (id) {
-        let details = await DataMovie.requestMovieDetails(id);
-        V.renderMovieDetail(details[0]);
+        let data = await DataMovie.requestMovieDetails(id);
+        V.renderMovieDetail(data);
       };
       C.handlerMovies = function () {
         C.getAllMovie(); // Recharger la liste des films
