@@ -1,17 +1,36 @@
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1c1c1c;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
 .cards{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
     gap: 16px;
     justify-content: center;
     padding: 2rem;
-
+    
 }
 .movie{
-
     border: 1px solid #9f9d9d;
     box-shadow: 0 4px 8px rgba(15, 14, 14, 0.2);
     max-width: 300px;
     border-radius:1rem;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 .movie__container{
     display: flex;
@@ -26,6 +45,7 @@
     height: 300px;
     box-shadow: 0 4px 8px rgba(21, 21, 21, 0.2);
     margin-bottom: 10px;
+    transition: transform 0.3s ease-in-out;
 }
 .movie__text{
     font-size: 1.2rem;
@@ -33,3 +53,34 @@
     margin-bottom: 10px;
     padding-bottom: 1rem;
 }
+
+
+/* Effet de survol sur la section */
+.movie:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Effet d'agrandissement de l'image au survol */
+.movie:hover .movie__affiche {
+    transform: scale(1.1);
+}
+
+/* Style du texte */
+.movie__text {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    color: #fff;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Responsivité pour les écrans plus petits */
+

@@ -32,6 +32,8 @@
       };
 
       C.getAllMovie = async function () {
+        let infosSection = document.querySelector("#detail");
+        infosSection.innerHTML = "";
         let data = await DataMovie.requestMovies();
         V.renderMovie(data);
       };
