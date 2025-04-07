@@ -66,21 +66,6 @@ function detailController() {
 }
 
 function categoryController() {
-    header('Content-Type: application/json');
-
-    $id_category = $_REQUEST['id_category'];
-
-    if (!isset($id_category) || !is_numeric($id_category)) {
-        echo json_encode(["success" => false, "message" => "ID de catégorie invalide"]);
-        exit();
-    }
-
-    $movies = getCategory($id_category);
-
-    if ($movies != null) {
-        echo json_encode(["success" => true, "movies" => $movies]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Aucun film trouvé pour cette catégorie"]);
-    }
-    exit();
+    $categories = getCategory();
+    return $categories ? $categories : false;
 }

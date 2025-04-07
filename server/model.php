@@ -75,12 +75,15 @@ function detailMovie($id) {
     return $res; 
 }
 
-function getCategory($id_category) {
-        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-        $sql = "SELECT * FROM Movie WHERE id_category = :id_category";
+function getCategory() {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "SELECT Category.id,Movie.id, Movie.name,Movie.image, Category.name FROM Movie
+                INNER JOIN Category ON Movie.id_category = Category.id
+                GROUP BY Category.id";
         $stmt = $cnx->prepare($sql);
-        $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+      
     }
     

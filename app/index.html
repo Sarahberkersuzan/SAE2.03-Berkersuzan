@@ -11,7 +11,6 @@
     <header id="header"></header>
 
     <section class="cards" id="content"></section>
-    <section class="details" id="detail"></section>
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
@@ -19,7 +18,7 @@
       import { Movie } from "./component/Movie/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
-      
+      import {MovieCategory} from "./component/MovieCategory/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -34,10 +33,13 @@
       };
 
       C.getAllMovie = async function () {
-        let infosSection = document.querySelector("#detail");
-        infosSection.innerHTML = "";
-        let data = await DataMovie.requestMovies();
-        V.renderMovie(data);
+        try {
+          let data = await DataMovie.requestCategory(); // Récupère les films depuis l'API
+          console.log("Données reçues :", data); // Vérifiez le format des données
+          V.renderCategory(data); // Affiche les films
+        } catch (error) {
+          console.error("Erreur lors de la récupération des films :", error);
+        }
       };
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
@@ -83,6 +85,11 @@
       V.renderMovieDetail = function (data) {
         let content = document.querySelector("#content");
         content.innerHTML = MovieDetail.format(data);
+      };
+
+      V.renderCategory = function (data) {
+        let content = document.querySelector("#content");
+        content.innerHTML = data.map(MovieCategory.format).join("");
       };
       C.start(); // Démarre l'application
     </script>
