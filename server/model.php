@@ -76,14 +76,43 @@ function detailMovie($id) {
 }
 
 function getCategory() {
-        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-        $sql = "SELECT Category.id,Movie.id, Movie.name,Movie.image, Category.name FROM Movie
-                INNER JOIN Category ON Movie.id_category = Category.id
-                GROUP BY Category.id";
-        $stmt = $cnx->prepare($sql);
-        $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $res;
-      
+        try {
+            $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ]);
+    
+            $sql = "SELECT 
+                        Category.id, 
+                        Category.name AS category_name, 
+                        Movie.id, 
+                        Movie.name, 
+                        Movie.image 
+                    FROM Movie
+                    JOIN Category ON Movie.id_category = Category.id
+                    ORDER BY Category.id";
+    
+            $stmt = $cnx->query($sql);
+            $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
+    
+            $category = [];
+            foreach ($rows as $row) {
+                if (!isset($category[$row->category.id])) {
+                    $category[$row->category_id] = [
+                        "name" => $row->category_name,
+                        "movie" => []
+                    ];
+                }
+                $category[$row->category.id]["movie"][] = [
+                    "id" => $row->movie.id,
+                    "name" => $row->movie.name,
+                    "image" => $row->movie.image
+                ];
+            }
+    
+            return array_values($category);
+        } catch (Exception $e) {
+            error_log("Erreur SQL : " . $e->getMessage());
+            return false;
+        }
     }
     
