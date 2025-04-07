@@ -10,6 +10,7 @@ MovieCategory.format = function (category) {
     html = html.replace("{{categoryName}}", category.name);
     
     let movieHtml = Movie.format(category.movie || []);
+    console.log(movieHtml);
     html = html.replace("{{movieCard}}", movieHtml);
 
   return html;
