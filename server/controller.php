@@ -66,6 +66,6 @@ function detailController() {
 }
 
 function categoryController() {
-    $categories = getCategory();
-    return $categories ? $categories : false;
+    $category = getCategory();
+    return $category ? $category : false;
 }

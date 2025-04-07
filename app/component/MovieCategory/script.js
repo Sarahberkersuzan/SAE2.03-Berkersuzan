@@ -7,7 +7,7 @@ let MovieCategory = {};
 
 MovieCategory.format = function (category) {
     let html = template;
-    html = html.replace("{{categoryName}}", category.name);
+    html = html.replace("{{categoryName}}", category_name);
     
     let movieHtml = Movie.format(category.movie || []);
     console.log(movieHtml);
