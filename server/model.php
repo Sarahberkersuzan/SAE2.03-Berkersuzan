@@ -74,3 +74,13 @@ function detailMovie($id) {
     $res = $stmt->fetch(PDO::FETCH_OBJ);
     return $res; 
 }
+
+function getCategory($id_category) {
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+        $sql = "SELECT * FROM Movie WHERE id_category = :id_category";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    

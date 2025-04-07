@@ -54,6 +54,10 @@ if ( isset($_REQUEST['todo']) ){
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
+    case 'categoryread' : // on veut afficher les catégories de films
+      $data =  categoryController();
+      break;
+
     case 'detailread': // on veut afficher les détails d'un film
       $data = detailController(); 
       break;
