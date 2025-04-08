@@ -30,5 +30,6 @@ DataMovie.addMovie= async function (fdata) {
     return data; // on retourne la réponse du serveur
 }
 
+
 export {DataMovie};
 

@@ -69,3 +69,33 @@ function categoryController() {
     $category = getCategory();
     return $category ? $category : false;
 }
+
+function profilController() {
+    header('Content-Type: application/json');
+
+    // Vérifiez que les paramètres sont définis
+    if (!isset($_REQUEST['nom']) || !isset($_REQUEST['avatar']) || !isset($_REQUEST['age'])) {
+        echo json_encode(["success" => false, "message" => "Paramètres manquants"]);
+        exit();
+    }
+
+    $nom = $_REQUEST['nom'];
+    $avatar = $_REQUEST['avatar'];
+    $age = $_REQUEST['age'];
+
+    // Vérifiez que l'âge est un entier valide
+    if (!is_numeric($age) || $age <= 0) {
+        echo json_encode(["success" => false, "message" => "Âge invalide"]);
+        exit();
+    }
+
+    $ok = addProfil($nom, $avatar, $age);
+
+    if ($ok != 0) {
+        echo json_encode(["success" => true, "message" => "Profil ajouté à la base de donnée"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Erreur lors de l'ajout du Profil"]);
+    }
+
+    exit();
+}

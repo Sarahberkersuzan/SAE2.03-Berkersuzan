@@ -84,9 +84,14 @@
       };
 
       V.renderMovieCategory = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = data.map(MovieCategory.format).join("");
-      };
+    let content = document.querySelector("#content");
+    content.innerHTML = ""; // Réinitialise le contenu
+
+    for (let i = 0; i < data.length; i++) {
+        let categoryHtml = MovieCategory.format(data[i]); // Formate chaque catégorie
+        content.innerHTML += categoryHtml; // Ajoute le HTML de la catégorie au contenu
+    }
+};
       C.start(); // Démarre l'application
     </script>
   </body>

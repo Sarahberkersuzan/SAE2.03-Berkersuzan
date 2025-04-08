@@ -11,11 +11,14 @@
 <body>
   <section id="log"></section>
   <section id="content"></section>
+  <section id="form"></section>
 
   <script type="module">
     import { Log } from "./component/Log/script.js";
     import { MovieForm } from "./component/MovieForm/script.js";
+    import { ProfilForm } from "./component/ProfilForm/script.js";
     import { DataMovie } from "./data/dataMovie.js";
+    import {DataProfil} from "./data/dataProfil.js";
     window.C = {};
 
   C.handlerAddMovie = async function () {
@@ -39,10 +42,32 @@
     }
   }
 
+  C.handlerAddProfil = async function () {
+    let form = document.querySelector(".addProfil__form");
+    let fd = new FormData(form);
+    let isEmpty = false;
+    form.querySelectorAll("input").forEach((input) => {
+      if (!input.value.trim()) {
+        isEmpty = true;
+      }
+    });
+    if (isEmpty) {
+      V.renderLog("Veuillez remplir tous les champs");
+      return;
+    }
+    let res = await DataProfil.addProfil(fd);
+    if (res.success){
+      V.renderLog("Le film a été ajouté avec succès");
+    } else {
+      V.renderLog("Erreur lors de l'ajout du film");
+    }
+};
+
 
     C.start = function () {
       V.renderLog("Démarrage de l'application");
       V.renderForm("C.handlerAddMovie()");
+      V.renderProfilForm("C.handlerAddProfil()");
     };
 
     window.V = {};
@@ -55,6 +80,11 @@
     V.renderForm = function (handler) {
       let content = document.querySelector("#content");
       content.innerHTML = MovieForm.format(handler);
+    };
+
+    V.renderProfilForm = function (handler) {
+      let content = document.querySelector("#form");
+      content.innerHTML = ProfilForm.format(handler);
     };
 
     C.start();
