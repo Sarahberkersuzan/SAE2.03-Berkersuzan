@@ -9,6 +9,7 @@ body {
     align-items: center;
     min-height: 100vh;
     flex-direction: column;
+    gap: 20px;
 }
 .cards{
     display: flex;
@@ -16,9 +17,7 @@ body {
     max-width: 1200px;
     width: 100%;
     gap: 16px;
-    justify-content: center;
-
-    
+    justify-content: center; 
 }
 .movie{
     border: 1px solid #9f9d9d;

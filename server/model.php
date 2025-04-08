@@ -96,7 +96,7 @@ function getCategory() {
     
             $category = [];
             foreach ($rows as $row) {
-                if (!isset($category[$row->Category_id])) {
+                if (!isset($category[$row->category_id])) {
                     $category[$row->category_id] = [
                         "name" => $row->category_name,
                         "movie" => []
