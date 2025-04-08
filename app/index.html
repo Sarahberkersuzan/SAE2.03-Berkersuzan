@@ -29,24 +29,19 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerMovies()");
-        C.getAllMovie();
+        C.getAllMovies();
       };
 
-      C.getAllMovie = async function () {
-        try {
-          let data = await DataMovie.requestCategory(); // Récupère les films depuis l'API
-          console.log("Données reçues :", data); // Vérifiez le format des données
-          V.renderCategory(data); // Affiche les films
-        } catch (error) {
-          console.error("Erreur lors de la récupération des films :", error);
-        }
+      C.getAllMovies = async function () {
+        let data = await DataMovie.requestMoviesCategory(); 
+        V.renderMovieCategory(data);
       };
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
         V.renderMovieDetail(data.movie);
       };
       C.handlerMovies = function () {
-        C.getAllMovie(); // Recharger la liste des films
+        C.getAllMovies(); // Recharger la liste des films
       };
   
 
@@ -87,7 +82,7 @@
         content.innerHTML = MovieDetail.format(data);
       };
 
-      V.renderCategory = function (data) {
+      V.renderMovieCategory = function (data) {
         let content = document.querySelector("#content");
         content.innerHTML = data.map(MovieCategory.format).join("");
       };

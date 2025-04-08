@@ -6,14 +6,13 @@ let template = await templateFile.text();
 let MovieCategory = {};
 
 MovieCategory.format = function (category) {
-    let html = template;
-    html = html.replace("{{categoryName}}", category_name);
-    
-    let movieHtml = Movie.format(category.movie || []);
-    console.log(movieHtml);
-    html = html.replace("{{movieCard}}", movieHtml);
+  let categoryHtml = template;
+  categoryHtml = categoryHtml.replace("{{name}}", category.name);
 
-  return html;
+  let moviesListHtml = Movie.format(category.movie || []);
+  categoryHtml = categoryHtml.replace("{{movie}}", moviesListHtml);
+
+  return categoryHtml;
 };
 
 export { MovieCategory };

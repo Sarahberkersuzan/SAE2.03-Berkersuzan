@@ -82,11 +82,11 @@ function getCategory() {
             ]);
     
             $sql = "SELECT 
-                        Category.id, 
+                        Category.id AS category_id, 
                         Category.name AS category_name, 
-                        Movie.id, 
-                        Movie.name, 
-                        Movie.image 
+                        Movie.id AS movie_id,
+                        Movie.name AS movie_name, 
+                        Movie.image AS movie_image
                     FROM Movie
                     JOIN Category ON Movie.id_category = Category.id
                     ORDER BY Category.id";
@@ -96,16 +96,16 @@ function getCategory() {
     
             $category = [];
             foreach ($rows as $row) {
-                if (!isset($category[$row->category.id])) {
+                if (!isset($category[$row->Category_id])) {
                     $category[$row->category_id] = [
                         "name" => $row->category_name,
                         "movie" => []
                     ];
                 }
-                $category[$row->category.id]["movie"][] = [
-                    "id" => $row->movie.id,
-                    "name" => $row->movie.name,
-                    "image" => $row->movie.image
+                $category[$row->category_id]["movie"][] = [
+                    "id" => $row->movie_id,
+                    "name" => $row->movie_name,
+                    "image" => $row->movie_image
                 ];
             }
     
