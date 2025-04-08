@@ -117,7 +117,7 @@ function getCategory() {
     }
 
     function addProfil($nom, $avatar, $age) {
-
+       
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
         $sql = "INSERT INTO Profil (nom, avatar, age) 
                 VALUES (:nom, :avatar, :age)";

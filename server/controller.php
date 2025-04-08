@@ -71,7 +71,6 @@ function categoryController() {
 }
 
 function profilController() {
-    header('Content-Type: application/json');
 
     // Vérifiez que les paramètres sont définis
     if (!isset($_REQUEST['nom']) || !isset($_REQUEST['avatar']) || !isset($_REQUEST['age'])) {
@@ -84,7 +83,7 @@ function profilController() {
     $age = $_REQUEST['age'];
 
     // Vérifiez que l'âge est un entier valide
-    if (!is_numeric($age) || $age <= 0) {
+    if ( $age <= 0) {
         echo json_encode(["success" => false, "message" => "Âge invalide"]);
         exit();
     }
