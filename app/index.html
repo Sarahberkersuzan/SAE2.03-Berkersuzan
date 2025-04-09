@@ -29,8 +29,9 @@
 
 
 
-      C.start = function () {
-        V.renderNavBar("C.handlerMovies()");
+      C.start = async function () {
+        let profils = await DataProfil.requestProfil();
+        V.renderNavBar("C.handlerMovies()","C.handlerProfil()", profils);
         C.getAllMovies();
       };
 
@@ -45,6 +46,25 @@
       C.handlerMovies = function () {
         C.getAllMovies(); // Recharger la liste des films
       };
+      C.handlerProfil = async function () {
+        const select = document.querySelector("#profil-select");
+        const selectedOption = select.selectedOptions[0];
+        const profileName = selectedOption.value;
+        const dob = selectedOption.getAttribute("data-dob");
+        const imageFilename = selectedOption.getAttribute("data-img");
+        const picture = document.querySelector("#profil-image");
+        const base = "https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/server/images/";
+
+        // Met à jour l'image de profil
+        picture.src = base + imageFilename;
+
+        // Récupère les films pour le profil sélectionné
+        let data = await DataMovie.requestMoviesCategory(); // Remplacez par une fonction adaptée si nécessaire
+        console.log("Films pour le profil sélectionné :", data);
+
+        // Affiche les films
+        V.renderMovieCategory(data);
+};
   
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -57,9 +77,9 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (handlerMovies) {
+      V.renderNavBar = function (handlerMovies,handlerProfil, profils) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(handlerMovies);
+        header.innerHTML = NavBar.format(handlerMovies,handlerProfil, profils);
       };
       /**
        * V.renderMovie
