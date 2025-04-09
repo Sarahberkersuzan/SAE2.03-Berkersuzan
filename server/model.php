@@ -131,4 +131,12 @@ function getCategory() {
         $res = $stmt->rowCount();
         return $res;
 }
-    
+
+function getAllProfil(){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "select id, nom, avatar from Profil";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; 
+}

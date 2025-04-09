@@ -1,6 +1,13 @@
 <nav class="navbar font-sans">
   <ul class="navbar__list">
     <li class="navbar__item" onclick="{{handlerMovies}}">Films</li>
+    <div class="navbar__profil">
+      <select class="navbar__select" onchange="{{handlerProfil}}">
+        {{profil}}
+      </select>
+
+      <img id="profil-avatar" class="https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/server/images/{{avatar}}" alt="avatar" />
+    </div>
   </ul>
 </nav>
 

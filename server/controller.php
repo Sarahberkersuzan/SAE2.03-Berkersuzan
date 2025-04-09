@@ -98,3 +98,8 @@ function profilController() {
 
     exit();
 }
+
+function readProfilController() {
+    $profil = getAllProfil();
+    return $profil;
+}
