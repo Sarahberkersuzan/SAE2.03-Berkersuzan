@@ -1,11 +1,77 @@
-*,
-*::after,
-*::before {
+/* === Reset CSS Moderne === */
+
+/* Box sizing universel */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-ul {
+/* Remove default margin/padding */
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* remove list styles on ul, ol elements */
+ul, ol {
+  list-style: none;
   padding: 0;
   margin: 0;
-  list-style: none;
 }
+
+/* Remove default link styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Images and videos responsive by default */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Remove default button/input styles */
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set default font and remove text adjustments */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family: system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: var(--color-bg, #fff);
+  color: var(--color-fg, #111);
+}
+
+/* Make form elements easier to work with */
+input, button, textarea, select {
+  font: inherit;
+  background-color: transparent;
+}
+
+/* Allow percentage-based heights in layout */
+html, body {
+  height: 100%;
+}
+
