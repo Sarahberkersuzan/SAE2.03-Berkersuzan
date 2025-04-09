@@ -2,42 +2,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 body {
-  gap: 2rem;
-  margin: 0;
-  padding: 40px 20px;
-  font-family: 'Inter', sans-serif;
-  background-color: #1F2937; 
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 40px 20px;
   min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: #1F2937; 
   animation: fadeIn 1s ease-in;
 }
 .addMovie {
+  position: relative;
   width: 100%;
   max-width: 900px;
+  padding: 40px;
   background: #2D3748; 
   border-radius: 16px;
-  padding: 40px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.7s ease-out;
-  position: relative;
+  
 }
 
 .addMovie__title {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #F9FAFB; 
   position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #F9FAFB; 
 }
 
 .addMovie__title::after {
   content: '';
   display: block;
+  margin: 10px auto 0;
   width: 60px;
   height: 4px;
-  margin: 10px auto 0;
   background-color: #4A5568; 
   border-radius: 2px;
 }
@@ -76,12 +77,12 @@ body {
 
 .addMovie__form input[type="button"],
 .addMovie__form input[type="submit"] {
+  padding: 14px;
   background-color: #4A5568;
   color: #F9FAFB;
   font-weight: 600;
   font-size: 16px;
   border: none;
-  padding: 14px;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;

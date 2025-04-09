@@ -1,8 +1,8 @@
 
 .movie-categories {
-    width: 100%;
     margin-bottom: 60px;
     padding: 30px 20px;
+    width: 100%;
     border-radius: 16px;
     background: linear-gradient(145deg, #2c2c2c, #1e1e1e);
     box-shadow: 0 8px 20px rgba(123, 146, 142, 0.4);
@@ -16,21 +16,20 @@
 
 
 .movie-categories h2 {
+    padding-left: 10px;
+    margin-bottom: 25px;
+    text-align: left;
     font-size: 2.2rem;
     font-weight: 700;
-    margin-bottom: 25px;
     color: #ffffff;
-    text-align: left;
-    padding-left: 10px;
     border-left: 4px solid #20a788; 
-    
 }
 
 .movies {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
     justify-content: center;
+    gap: 16px;
   }
 
 
