@@ -1,123 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>SAE2.03 APP</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
-  </head>
 
-  <body>
-    <header id="header"></header>
+<head>
+  <title>SAE2.03 APP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+</head>
 
-    <section class="cards" id="content"></section>
-    <section class="movies-categories" id="category"></section>
+<body>
+  <header id="header"></header>
 
-    <script type="module">
-      import { NavBar } from "./component/NavBar/script.js";
+  <section class="cards" id="content"></section>
+  <section class="movies-categories" id="category"></section>
 
-      import { Movie } from "./component/Movie/script.js";
-      import { DataMovie } from "./data/dataMovie.js";
-      import { MovieDetail } from "./component/MovieDetail/script.js";
-      import { MovieCategory } from "./component/MovieCategory/script.js";
-      import { DataProfil } from "./data/dataProfil.js";
+  <script type="module">
+    import { NavBar } from "./component/NavBar/script.js";
 
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
-      window.C = {};
+    import { Movie } from "./component/Movie/script.js";
+    import { DataMovie } from "./data/dataMovie.js";
+    import { MovieDetail } from "./component/MovieDetail/script.js";
+    import { MovieCategory } from "./component/MovieCategory/script.js";
+    import { DataProfil } from "./data/dataProfil.js";
+
+    // Controleur
+    // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
+    // Une fois l'application terminée, on pourrait remettre let C.
+    window.C = {};
 
 
 
-      C.start = async function () {
-        let profils = await DataProfil.requestProfil();
-        V.renderNavBar("C.handlerMovies()","C.handlerProfil()", profils);
-        C.getAllMovies();
-      };
+    C.start = async function () {
+      let profils = await DataProfil.requestProfil();
+      V.renderNavBar("C.handlerMovies()", "C.handlerProfil()", profils);
+      C.getAllMovies();
+    };
 
-      C.getAllMovies = async function () {
-        let data = await DataMovie.requestMoviesCategory(); 
-        V.renderMovieCategory(data);
-      };
+    C.getAllMovies = async function () {
+      let data = await DataMovie.requestMoviesCategory();
+      V.renderMovieCategory(data);
+    };
 
-      C.handlerDetail = async function (id) {
-        let data = await DataMovie.requestMovieDetails(id);
-        V.renderMovieDetail(data.movie);
-      };
+    C.handlerDetail = async function (id) {
+      let data = await DataMovie.requestMovieDetails(id);
+      V.renderMovieDetail(data.movie);
+    };
 
-      C.handlerMovies = function () {
-        C.getAllMovies(); // Recharger la liste des films
-      };
+    C.handlerMovies = function () {
+      C.getAllMovies(); // Recharger la liste des films
+    };
 
-      C.handlerProfil = async function () {
-        const select = document.querySelector("#profil-select");
-        const selectedOption = select.selectedOptions[0];
-        const profileName = selectedOption.value;
-        const dob = selectedOption.getAttribute("data-dob");
-        const imageFilename = selectedOption.getAttribute("data-img");
-        const picture = document.querySelector("#profil-image");
-        const base = "https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/server/images/";
+    C.handlerProfil = async function () {
+      const selectedOption = document.querySelector("#profil-select").selectedOptions[0];
+      const dob = selectedOption.getAttribute("data-dob");
+      const imageFilename = selectedOption.getAttribute("data-img");
 
-        // Met à jour l'image de profil
-        picture.src = base + imageFilename;
+      // Met à jour l'image de profil
+      document.querySelector("#profil-image").src = `https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/server/images/${imageFilename}`;
 
-        // Récupère les films pour le profil sélectionné
-        let data = await DataMovie.requestMoviesCategory(); // Remplacez par une fonction adaptée si nécessaire
-        console.log("Films pour le profil sélectionné :", data);
+      // Récupère et affiche les films
+      const data = await DataMovie.requestMoviesCategory();
+      V.renderMovieCategory(data);
+    };
 
-        // Affiche les films
-        V.renderMovieCategory(data);
-};
-  
 
-      // Vue (contient tout ce qui est relatif à l'affichage)
-      window.V = {};
+    // Vue (contient tout ce qui est relatif à l'affichage)
+    window.V = {};
 
-      /**
-       * V.renderNavBar
-       *
-       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-       * formaté par le composant NavBar.
-       */
-      V.renderNavBar = function (handlerMovies,handlerProfil, profils) {
-        let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(handlerMovies,handlerProfil, profils);
-      };
-      /**
-       * V.renderMovie
-       *
-       * Cette fonction est responsable de l'affichage des films.
-       * Elle sélectionne l'élément HTML avec l'ID "content" et y insère le contenu
-       * formaté par le composant Movie.
-       */
-      V.renderMovie = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = Movie.format(data);
-      };
-      /**
-       * V.renderMovieDetail
-       *
-       * Cette fonction est responsable de l'affichage des détails d'un film.
-       * Elle sélectionne l'élément HTML avec l'ID "detail" et y insère le contenu
-       * formaté par le composant MovieDetail.
-       */
-      V.renderMovieDetail = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = MovieDetail.format(data);
-      };
+    /**
+     * V.renderNavBar
+     *
+     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
+     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
+     * formaté par le composant NavBar.
+     */
+    V.renderNavBar = function (handlerMovies, handlerProfil, profils) {
+      let header = document.querySelector("#header");
+      header.innerHTML = NavBar.format(handlerMovies, handlerProfil, profils);
+    };
+    /**
+     * V.renderMovie
+     *
+     * Cette fonction est responsable de l'affichage des films.
+     * Elle sélectionne l'élément HTML avec l'ID "content" et y insère le contenu
+     * formaté par le composant Movie.
+     */
+    V.renderMovie = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = Movie.format(data);
+    };
+    /**
+     * V.renderMovieDetail
+     *
+     * Cette fonction est responsable de l'affichage des détails d'un film.
+     * Elle sélectionne l'élément HTML avec l'ID "detail" et y insère le contenu
+     * formaté par le composant MovieDetail.
+     */
+    V.renderMovieDetail = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = MovieDetail.format(data);
+    };
 
-      V.renderMovieCategory = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = ""; // Réinitialise le contenu
+    V.renderMovieCategory = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = ""; // Réinitialise le contenu
 
-    for (let i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         let categoryHtml = MovieCategory.format(data[i]); // Formate chaque catégorie
         content.innerHTML += categoryHtml; // Ajoute le HTML de la catégorie au contenu
-    }
-};
-      C.start(); // Démarre l'application
-    </script>
-  </body>
+      }
+    };
+    C.start(); // Démarre l'application
+  </script>
+</body>
+
 </html>
 <script type="module"></script>
