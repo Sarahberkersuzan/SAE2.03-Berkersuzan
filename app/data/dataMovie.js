@@ -21,7 +21,7 @@ DataMovie.requestMoviesCategory = async function(){
     return category;
 }
 DataMovie.requestMovieProfil = async function(age){
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=movieProfil&id=" + age );
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=movieProfil&age=" + age );
     let profil = await answer.json();
     return profil;
 }

@@ -19,8 +19,8 @@
       import { Movie } from "./component/Movie/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
-      import {MovieCategory} from "./component/MovieCategory/script.js";
-      import {DataProfil} from "./data/dataProfil.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
+      import { DataProfil } from "./data/dataProfil.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -39,13 +39,16 @@
         let data = await DataMovie.requestMoviesCategory(); 
         V.renderMovieCategory(data);
       };
+
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
         V.renderMovieDetail(data.movie);
       };
+
       C.handlerMovies = function () {
         C.getAllMovies(); // Recharger la liste des films
       };
+
       C.handlerProfil = async function () {
         const select = document.querySelector("#profil-select");
         const selectedOption = select.selectedOptions[0];
@@ -105,8 +108,8 @@
       };
 
       V.renderMovieCategory = function (data) {
-    let content = document.querySelector("#content");
-    content.innerHTML = ""; // Réinitialise le contenu
+        let content = document.querySelector("#content");
+        content.innerHTML = ""; // Réinitialise le contenu
 
     for (let i = 0; i < data.length; i++) {
         let categoryHtml = MovieCategory.format(data[i]); // Formate chaque catégorie
