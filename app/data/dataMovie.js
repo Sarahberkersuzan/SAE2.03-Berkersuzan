@@ -3,8 +3,8 @@
 let HOST_URL = "https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan";
 let DataMovie = {};
 
- DataMovie.requestMovies = async function(){
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=readmovies" );
+ DataMovie.requestMovies = async function(age){
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=readmovies&age=" + age );
     let movies = await answer.json();
     return movies;
 }
@@ -20,9 +20,9 @@ DataMovie.requestMoviesCategory = async function(){
     let category = await answer.json();
     return category;
 }
-DataMovie.requestMovieProfil = async function(age){
+/*DataMovie.requestMovieProfil = async function(age){
     let answer = await fetch(HOST_URL + "/server/script.php?todo=movieProfil&age=" + age );
     let profil = await answer.json();
     return profil;
-}
+}*/
 export {DataMovie};
