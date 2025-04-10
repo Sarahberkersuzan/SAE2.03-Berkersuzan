@@ -140,3 +140,13 @@ function getAllProfil(){
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; 
 }
+
+function getMovieProfil($age){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, image, min_age FROM Movie WHERE min_age <= :age";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; 
+}

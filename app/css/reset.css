@@ -1,77 +1,67 @@
-/* === Reset CSS Moderne === */
-
-/* Box sizing universel */
-*, *::before, *::after {
+*,
+*::after,
+*::before {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Remove default margin/padding */
-body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
-  margin: 0;
-  padding: 0;
-}
-
-/* remove list styles on ul, ol elements */
-ul, ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Remove default link styling */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Images and videos responsive by default */
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-/* Remove default button/input styles */
-button, input, select, textarea {
-  font: inherit;
-  color: inherit;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  outline: none;
-}
-
-/* Smooth scroll */
 html {
-  scroll-behavior: smooth;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
-/* Set core root defaults */
-html:focus-within {
-  scroll-behavior: smooth;
+body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin-block-end: 0;
+  
 }
 
-/* Set default font and remove text adjustments */
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
 body {
   min-height: 100vh;
   line-height: 1.5;
-  font-family: system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  background-color: var(--color-bg, #fff);
-  color: var(--color-fg, #111);
+    margin: 0;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+h1, h2, h3, h4,
+button, input, label {
+  line-height: 1.1;
 }
 
-/* Make form elements easier to work with */
-input, button, textarea, select {
-  font: inherit;
-  background-color: transparent;
+h1, h2,
+h3, h4 {
+  text-wrap: balance;
 }
 
-/* Allow percentage-based heights in layout */
-html, body {
-  height: 100%;
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
 }
 
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input, button,
+textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}

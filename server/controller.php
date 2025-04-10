@@ -25,6 +25,14 @@ function readMoviesController(){
     return $movies;
 }
 
+function movieProfilController() {
+    $age = $_REQUEST['age'];
+    if ($age == null) {
+        return false;
+    }
+    return getMovieProfil($age);
+}
+
 function addController() {
   header('Content-Type: application/json');
 
