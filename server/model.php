@@ -18,10 +18,11 @@ define("DBNAME", "berkersuzan1");
 define("DBLOGIN", "berkersuzan1");
 define("DBPWD", "berkersuzan1");
 
-function getAllMovies(){
+function getAllMovies($age){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "select id, name, image from Movie";
+    $sql = "SELECT id, name, image FROM Movie WHERE min_age <= :age";
     $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; 
@@ -76,7 +77,6 @@ function detailMovie($id) {
 }
 
 function getCategory() {
-        try {
             $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]);
@@ -110,10 +110,6 @@ function getCategory() {
             }
     
             return array_values($category);
-        } catch (Exception $e) {
-            error_log("Erreur SQL : " . $e->getMessage());
-            return false;
-        }
     }
 
     function addProfil($nom, $avatar, $age) {
