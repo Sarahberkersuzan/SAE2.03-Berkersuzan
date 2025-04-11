@@ -28,12 +28,13 @@
     // Une fois l'application terminée, on pourrait remettre let C.
     window.C = {};
 
-    C.activeProfilId = null;
+    C.profile = null;
 
     C.start = async function () {
       let profils = await DataProfil.requestProfil();
       V.renderNavBar("C.handlerMovies()", "C.handlerProfil()", profils);
       C.getAllMovies();
+      C.getCategories();
     };
 
     C.getAllMovies = async function () {
@@ -51,24 +52,36 @@
     };
 
     C.handlerProfil = async function () {
-      const selectedOption = document.querySelector("#profil-select").selectedOptions[0];
-      const img = selectedOption.getAttribute("data-img");
-      const age = parseInt(selectedOption.getAttribute("data-age"), 10);
+      const select = document.querySelector("#profil-select");
+      let val = select.options[select.selectedIndex].value;
+    let dataProfil = await DataProfil.readOne(val);
+    C.profil = dataProfil[select.selectedIndex];
 
-      document.querySelector("#profil-image").src = `https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/server/images/${img}`;
+    const profileImage = document.querySelector("#profil-image");
+    if (profileImage && C.profil.avatar) {
+        profileImage.src = `https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/server/images/${C.profil.avatar}`;
+    }
 
-      const allMovies = await DataMovie.requestMoviesCategory() || [];
-      const filteredMovies = allMovies.filter(movie => age >= (movie.minAge || 0));
+    C.getAllMovies(C.profil.age);
+};
+      
+C.getCategories = async function () {
+        if (!C.profile) {
+          document.querySelector("#content").innerHTML =
+            "<p>Veuillez sélectionner un profil.</p>";
+          return;
+        }
+        let categories = await DataMovie.requestMovies(99);
+        if (!Array.isArray(categories) || categories.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
+          return;
+        }
+        V.renderMovieCategory(categories); 
+      };
 
-      if (!filteredMovies.length) {
-        console.log("Aucun film disponible pour votre profil.");
-        V.renderMovieCategory([]);
-        return;
-      }
-
-      V.renderMovieCategory(filteredMovies);
-    };
     
+
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
@@ -109,12 +122,11 @@
 
     V.renderMovieCategory = function (data) {
       let content = document.querySelector("#content");
-      content.innerHTML = ""; // Réinitialise le contenu
-
-      for (let i = 0; i < data.length; i++) {
-        let categoryHtml = MovieCategory.format(data[i]); // Formate chaque catégorie
-        content.innerHTML += categoryHtml; // Ajoute le HTML de la catégorie au contenu
-      }
+        let formattedContent = "";
+        for (let category of data) {
+          formattedContent += MovieCategory.format(category);
+        }
+        content.innerHTML = formattedContent;
     };
     C.start(); // Démarre l'application
   </script>

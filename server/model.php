@@ -20,7 +20,7 @@ define("DBPWD", "berkersuzan1");
 
 function getAllMovies($age){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image FROM Movie WHERE min_age <= :age";
+    $sql = "SELECT id, name, image, min_age FROM Movie WHERE min_age <= :age";
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':age', $age, PDO::PARAM_INT);
     $stmt->execute();
@@ -76,7 +76,7 @@ function detailMovie($id) {
     return $res; 
 }
 
-function getCategory() {
+function getCategory($age) {
             $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]);
@@ -88,11 +88,14 @@ function getCategory() {
                         Movie.name AS movie_name, 
                         Movie.image AS movie_image
                     FROM Movie
-                    JOIN Category ON Movie.id_category = Category.id
-                    ORDER BY Category.id";
+                    INNER JOIN Category ON Movie.id_category = Category.id
+                    WHERE Movie.min_age <= :age" ;
     
-            $stmt = $cnx->query($sql);
-            $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+         $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':age', $age, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
     
             $category = [];
             foreach ($rows as $row) {
@@ -111,7 +114,7 @@ function getCategory() {
     
             return array_values($category);
     }
-
+    
     function addProfil($nom, $avatar, $age) {
        
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);

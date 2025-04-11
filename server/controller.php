@@ -21,8 +21,7 @@
 require("model.php");
 
 function readMoviesController(){
-    $age = $_REQUEST['age'];
-    $movies = getAllMovies($age);
+    $movies = getAllMovies();
     return $movies;
 }
 
@@ -67,7 +66,8 @@ function detailController() {
 }
 
 function categoryController() {
-    $category = getCategory();
+    $age = isset($_REQUEST['age']) ? $_REQUEST['age'] : 0;
+    $category = getCategory($age);
     return $category ? $category : false;
 }
 
