@@ -18,11 +18,10 @@ define("DBNAME", "berkersuzan1");
 define("DBLOGIN", "berkersuzan1");
 define("DBPWD", "berkersuzan1");
 
-function getAllMovies($age){
+function getAllMovies(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, image, min_age FROM Movie WHERE min_age <= :age";
+    $sql = "select id, name, image from Movie";
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':age', $age);
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; 

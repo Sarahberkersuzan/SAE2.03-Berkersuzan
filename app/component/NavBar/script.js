@@ -14,7 +14,7 @@ NavBar.format = function (handlerMovies, handlerProfil, profils) {
     profil += `<option value="${p.nom}" data-img="${p.avatar}" data-dob="${p.age}">${p.nom}</option>`;
   }
 
-  let avatar = profils[0]?.image || "";
+  let avatar = profils[0]?.avatar || "";
   html = html.replace("{{profil}}", profil);
   html = html.replace("{{avatar}}", avatar);
   return html;

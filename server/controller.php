@@ -21,11 +21,8 @@
 require("model.php");
 
 function readMoviesController(){
-    $age = $_REQUEST['age'];
-    if ($age == null) {
-        return false;
-    }
-    return getAllMovies($age);
+    $movies = getAllMovies();
+    return $movies;
 }
 
 function addController() {
