@@ -7,4 +7,6 @@ DataProfil.requestProfil = async function(){
     return profil;
 }
 
+
+
 export {DataProfil};
