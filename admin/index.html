@@ -23,45 +23,55 @@
     import {ModifyProfilForm} from "./component/ModifyProfilForm/script.js";
     window.C = {};
 
-  C.handlerAddMovie = async function () {
+    C.handlerAddMovie = async function () {
     let form = document.querySelector(".addMovie__form");
     let fd = new FormData(form);
+    let inputs = form.querySelectorAll("input");
     let isEmpty = false;
-    form.querySelectorAll("input").forEach((input) => {
-      if (!input.value.trim()) {
-        isEmpty = true;
-      }
-    });
-    if (isEmpty) {
-      V.renderLog("Veuillez remplir tous les champs");
-      return;
-    }
-    let res = await DataMovie.addMovie(fd);
-    if (res.success){
-      V.renderLog("Le film a été ajouté avec succès");
-    } else {
-      V.renderLog("Erreur lors de l'ajout du film");
-    }
-  }
 
-  C.handlerAddProfil = async function () {
+    for (let i = 0; i < inputs.length; i++) {
+        if (!inputs[i].value) { 
+            isEmpty = true;
+            break;
+        }
+    }
+
+    if (isEmpty) {
+        V.renderLog("Veuillez remplir tous les champs");
+        return;
+    }
+
+    let res = await DataMovie.addMovie(fd);
+    if (res.success) {
+        V.renderLog("Le film a été ajouté avec succès");
+    } else {
+        V.renderLog("Erreur lors de l'ajout du film");
+    }
+};
+
+C.handlerAddProfil = async function () {
     let form = document.querySelector(".addProfil__form");
     let fd = new FormData(form);
+    let inputs = form.querySelectorAll("input");
     let isEmpty = false;
-    form.querySelectorAll("input").forEach((input) => {
-      if (!input.value.trim()) {
-        isEmpty = true;
-      }
-    });
-    if (isEmpty) {
-      V.renderLog("Veuillez remplir tous les champs");
-      return;
+
+    for (let i = 0; i < inputs.length; i++) {
+        if (!inputs[i].value) { // Vérifie uniquement si la valeur est vide
+            isEmpty = true;
+            break;
+        }
     }
+
+    if (isEmpty) {
+        V.renderLog("Veuillez remplir tous les champs");
+        return;
+    }
+
     let res = await DataProfil.addProfil(fd);
-    if (res.success){
-      V.renderLog("Le profil a été ajouté avec succès");
+    if (res.success) {
+        V.renderLog("Le profil a été ajouté avec succès");
     } else {
-      V.renderLog("Erreur lors de l'ajout du profil");
+        V.renderLog("Erreur lors de l'ajout du profil");
     }
 };
 
