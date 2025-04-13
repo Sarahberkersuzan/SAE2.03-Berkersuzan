@@ -144,10 +144,25 @@ function readProfil(){
 function readOneProfil($id) {
     
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "select * from Profil where id = :id";
+    $sql = "SELECT * FROM Profil WHERE id = :id";
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; 
+}
+
+function modifyProfil($id, $nom, $avatar, $age) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "UPDATE Profil 
+            SET nom = :nom, avatar = :avatar, age = :age 
+            WHERE id = :id"; 
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':avatar', $avatar);
+    $stmt->bindParam(':age', $age);
+    $stmt->execute();
+    $res = $stmt->rowCount(); 
     return $res; 
 }

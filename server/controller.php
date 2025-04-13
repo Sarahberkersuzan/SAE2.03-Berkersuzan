@@ -111,3 +111,17 @@ function readProfilController() {
      
       return $profils;
 }
+
+function modifyProfilController() {
+    $id = $_REQUEST['id'] ?? null;
+    $name = $_REQUEST['nom'] ?? null;
+    $image = $_REQUEST['avatar'] ?? null;
+    $age = $_REQUEST['age'] ?? null;
+
+    if (empty($id) || empty($nom) || empty($age)) {
+        return "Erreur : Tous les champs obligatoires doivent être remplis.";
+    }
+
+    $ok = modifyProfil($id, $nom, $avatar, $age);
+    return $ok ? "Le profil a été modifié avec succès." : "Erreur lors de la modification du profil.";
+}
