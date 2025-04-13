@@ -114,8 +114,8 @@ function readProfilController() {
 
 function modifyProfilController() {
     $id = $_REQUEST['id'] ?? null;
-    $name = $_REQUEST['nom'] ?? null;
-    $image = $_REQUEST['avatar'] ?? null;
+    $nom = $_REQUEST['nom'] ?? null;
+    $avatar = $_REQUEST['avatar'] ?? null;
     $age = $_REQUEST['age'] ?? null;
 
     if (empty($id) || empty($nom) || empty($age)) {

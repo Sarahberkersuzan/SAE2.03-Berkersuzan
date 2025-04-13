@@ -66,24 +66,12 @@
 };
 
     C.handlerModifyProfil = async function () {
-      let form = document.querySelector(".modifyProfil__form");
+      let form = document.querySelector('.modifyProfil__form');
+      // Si tous les champs sont remplis, on peut envoyer les données
       let fd = new FormData(form);
-      let isEmpty = false;
-      form.querySelectorAll("input").forEach((input) => {
-        if (!input.value.trim()) {
-          isEmpty = true;
-        }
-      });
-      if (isEmpty) {
-        V.renderLog("Veuillez remplir tous les champs");
-        return;
-      }
       let res = await DataProfil.modifyProfil(fd);
-      if (res.success){
-        V.renderLog("Le profil a été modifié avec succès");
-      } else {
-        V.renderLog("Erreur lors de la modification du profil");
-      }
+      // Affichage du résultat dans le log
+      V.renderLog(res);
     };
 
     C.loadProfils = async function() {
@@ -93,7 +81,7 @@
           let profil = profils[i];
           optionsHtml += `<option value="${profil.id}">${profil.nom}</option>`;
         }
-        let select = document.querySelector('#profil-select');
+        let select = document.querySelector('#modifyProfil-select');
         if (select) {
           select.innerHTML = optionsHtml;
         }
