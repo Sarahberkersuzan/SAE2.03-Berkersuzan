@@ -28,7 +28,7 @@
     // Une fois l'application terminée, on pourrait remettre let C.
     window.C = {};
 
-    C.profile = null;
+    C.profil = null;
 
     C.start = async function () {
       let profils = await DataProfil.requestProfil();
@@ -36,6 +36,15 @@
       C.getAllMovies();
       C.getCategories();
     };
+
+    C.Accueil = function () {
+        if (C.profil) {
+          C.getAllMovies(C.profil.age); 
+        } else {
+          document.querySelector("#content").innerHTML =
+            "<p>Veuillez sélectionner un profil.</p>";
+        }
+      };
     
     C.getAllMovies = async function (age) {
       let data = await DataMovie.requestMovies(age);
