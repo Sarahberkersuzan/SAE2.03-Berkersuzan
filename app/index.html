@@ -36,9 +36,14 @@
       C.getAllMovies();
       C.getCategories();
     };
-
-    C.getAllMovies = async function () {
-      let data = await DataMovie.requestMoviesCategory();
+    
+    C.getAllMovies = async function (age) {
+      let data = await DataMovie.requestMovies(age);
+      if (!Array.isArray(data) || data.length === 0) {
+        document.querySelector("#content").innerHTML =
+          "<p>Aucun film disponible pour votre tranche d'âge.</p>";
+        return;
+      }
       V.renderMovieCategory(data);
     };
 
@@ -53,34 +58,34 @@
 
     C.handlerProfil = async function () {
       const select = document.querySelector("#profil-select");
-      let val = select.options[select.selectedIndex].value;
-    let dataProfil = await DataProfil.readOne(val);
-    C.profil = dataProfil[select.selectedIndex];
+      if (select.value === "") {
+        C.profil = null; // Réinitialise le profil
+        document.querySelector("#content").innerHTML = "<p>Aucun profil sélectionné.</p>";
+        return;
+      }
 
-    const profileImage = document.querySelector("#profil-image");
-    if (profileImage && C.profil.avatar) {
+      let dataProfil = await DataProfil.readOne(select.value);
+      C.profil = dataProfil[0];
+
+      const profileImage = document.querySelector("#profil-image");
+      if (profileImage && C.profil.avatar) {
         profileImage.src = `https://mmi.unilim.fr/~berkersuzan1/SAE2.03-Berkersuzan/server/images/${C.profil.avatar}`;
-    }
+      }
 
-    C.getAllMovies(C.profil.age);
-};
-      
-C.getCategories = async function () {
-        if (!C.profile) {
-          document.querySelector("#content").innerHTML =
-            "<p>Veuillez sélectionner un profil.</p>";
-          return;
-        }
-        let categories = await DataMovie.requestMovies(99);
-        if (!Array.isArray(categories) || categories.length === 0) {
-          document.querySelector("#content").innerHTML =
-            "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
-          return;
-        }
-        V.renderMovieCategory(categories); 
-      };
+      C.getAllMovies(C.profil.age);
+    };
 
-    
+    C.getCategories = async function () {
+      let categories = await DataMovie.requestMovies(99);
+      if (!Array.isArray(categories) || categories.length === 0) {
+        document.querySelector("#content").innerHTML =
+          "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
+        return;
+      }
+      V.renderMovieCategory(categories);
+    };
+
+
 
 
     // Vue (contient tout ce qui est relatif à l'affichage)
@@ -122,11 +127,11 @@ C.getCategories = async function () {
 
     V.renderMovieCategory = function (data) {
       let content = document.querySelector("#content");
-        let formattedContent = "";
-        for (let category of data) {
-          formattedContent += MovieCategory.format(category);
-        }
-        content.innerHTML = formattedContent;
+      let formattedContent = "";
+      for (let category of data) {
+        formattedContent += MovieCategory.format(category);
+      }
+      content.innerHTML = formattedContent;
     };
     C.start(); // Démarre l'application
   </script>

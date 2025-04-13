@@ -101,6 +101,13 @@ function profilController() {
 }
 
 function readProfilController() {
-    $profil = getAllProfil();
-    return $profil;
+    if (!isset($_REQUEST['id'])) {
+        $profils = readProfil(); 
+      }
+      else{
+        $id = $_REQUEST['id'];
+        $profils = readOneProfil($id);
+      }
+     
+      return $profils;
 }

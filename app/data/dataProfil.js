@@ -10,7 +10,6 @@ DataProfil.requestProfil = async function(){
 
 DataProfil.readOne = async function (id) {
     let answer = await fetch(HOST_URL + "/server/script.php?todo=readProfil&id=" + id);
-    
     let res = await answer.json();
     return res;
   };

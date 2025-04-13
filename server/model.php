@@ -18,11 +18,12 @@ define("DBNAME", "berkersuzan1");
 define("DBLOGIN", "berkersuzan1");
 define("DBPWD", "berkersuzan1");
 
-function getAllMovies($age){
+function getAllMovies(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image, min_age FROM Movie WHERE min_age <= :age";
+    $sql = "SELECT Movie.id, Movie.name, Movie.image, Movie.min_age, Category.name AS category_name 
+            FROM Movie 
+            INNER JOIN Category ON Movie.id_category = Category.id";
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; 
@@ -131,7 +132,7 @@ function getCategory($age) {
         return $res;
 }
 
-function getAllProfil(){
+function readProfil(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "select id, nom, avatar from Profil";
     $stmt = $cnx->prepare($sql);
@@ -140,4 +141,13 @@ function getAllProfil(){
     return $res; 
 }
 
-
+function readOneProfil($id) {
+    
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "select * from Profil where id = :id";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; 
+}
