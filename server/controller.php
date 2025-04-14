@@ -125,3 +125,15 @@ function modifyProfilController() {
     $ok = modifyProfil($id, $nom, $avatar, $age);
     return $ok ? "Le profil a été modifié avec succès." : "Erreur lors de la modification du profil.";
 }
+
+function addToFavoriteController() {
+    $id_movie = $_REQUEST['id_movie'];
+    $id_profil = $_REQUEST['id_profil'];
+
+    if (empty($id_movie) || empty($id_profil)) {
+        return "Erreur : Tous les champs obligatoires doivent être remplis.";
+    }
+
+    $ok = addToFavorite($id_movie, $id_profil);
+    return $ok ? "Le film a été ajouté aux favoris." : "Erreur lors de l'ajout aux favoris.";
+}

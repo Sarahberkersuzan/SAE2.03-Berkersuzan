@@ -54,23 +54,27 @@ if ( isset($_REQUEST['todo']) ){
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
-    case 'modifyProfil' : // on veut afficher les catégories de films
+    case 'addToFavorite' : 
+      $data =  addToFavoriteController();
+      break;
+
+    case 'modifyProfil' : 
       $data =  modifyProfilController();
       break;
 
-    case 'readProfil' : // on veut afficher les catégories de films
+    case 'readProfil' : 
       $data =  readProfilController();
       break;
       
-    case 'addProfil' : // on veut afficher les catégories de films
+    case 'addProfil' : 
       $data =  profilController();
       break;
 
-    case 'category' : // on veut afficher les catégories de films
+    case 'category' : 
       $data =  categoryController();
       break;
 
-    case 'detailread': // on veut afficher les détails d'un film
+    case 'detailread': 
       $data = detailController(); 
       break;
 

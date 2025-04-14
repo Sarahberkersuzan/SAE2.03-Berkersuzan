@@ -166,3 +166,15 @@ function modifyProfil($id, $nom, $avatar, $age) {
     $res = $stmt->rowCount(); 
     return $res; 
 }
+function addToFavorite($id_movie, $id_profil) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "INSERT INTO Favoris (id_movie, id_profil) 
+            VALUES (:id_movie, :id_profil)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_movie', $id_movie);
+    $stmt->bindParam(':id_profil', $id_profil);
+
+    $stmt->execute();
+
+    return $stmt->rowCount();
+}
