@@ -155,3 +155,9 @@ function readFavoriteController() {
         return ["error" => "Impossible de supprimer le film de vos favoris."];
     }
   }
+
+
+  function enAvantController(){
+    $data = enAvant();
+    return $data ? $data : [];
+  }

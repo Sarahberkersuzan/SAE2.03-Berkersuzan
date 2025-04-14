@@ -33,4 +33,10 @@ DataMovie.deleteFavorite = async function (id_profil, id_movie) {
     return data;
 }
 
+DataMovie.enAvant = async function(){
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=readEnAvant");
+    let detail = await answer.json();
+    return detail;
+}
+
 export {DataMovie};
