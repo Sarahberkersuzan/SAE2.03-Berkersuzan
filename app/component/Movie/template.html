@@ -6,6 +6,6 @@
         </div>
     </div>
     <div class="movie__favorite__container">
-        <bouton class="movie__favorite" onclick="{{onclickFavorite}}">Ajouter aux favoris</bouton>
+        <bouton class="movie__favorite" onclick="event.stopPropagation();{{handlerButton}}">{{click}}</bouton>
     </div>
 </section>
