@@ -1,10 +1,16 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
   color: var(--color-fg);
   background-color: var(--color-bg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
   .navbar__list {
     display: flex;
@@ -69,21 +75,48 @@
 /* Responsive (mobile) */
 @media (max-width: 640px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row; /* Garder une disposition horizontale */
+    align-items: center;
+    gap: 1rem; /* Diminuer l'espace entre les éléments */
+    padding: 0.5rem 1rem; /* Réduire les espacements */
+  }
+
+  .navbar__list {
+    flex-direction: row; /* Maintenir les éléments en ligne */
     gap: 1rem;
-    padding: 1rem;
+    flex-wrap: wrap; /* Permet aux éléments de se répartir correctement */
+    width: 100%;
+    justify-content: flex-start;
+  }
 
-    .navbar__list {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
+  .navbar__profil {
+    gap: 0.5rem;
+    /* Ajuster la taille du profil si nécessaire */
+  }
 
-    .navbar__profil {
-      width: 100%;
-      justify-content: space-between;
-    }
+  .navbar__item {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem; /* Réduire la taille des éléments de menu */
+  }
+
+  .navbar__label {
+    font-size: 0.75rem; /* Réduire la taille de la police des labels */
+  }
+
+  .navbar__select {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .navbar__image {
+    width: 32px;
+    height: 32px; /* Réduire la taille de l'image du profil */
   }
 }
+
+/* Espace réservé pour le contenu */
+.main {
+  padding-top: 80px; /* Hauteur de la navbar, ajuste si besoin */
+}
+
 
