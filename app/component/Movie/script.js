@@ -31,4 +31,5 @@ Movie.format = function (movies, isFavorisPage = false) {
   return html;
 };
 
+
 export {Movie};

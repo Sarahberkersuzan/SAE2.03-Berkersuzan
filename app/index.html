@@ -10,7 +10,8 @@
 
 <body>
   <header id="header"></header>
-
+  <h1 class="enAvant__title">A la une en ce moment</h1>
+  <section class="EnAvants" id="laUne"></section>
   <section class="cards" id="content"></section>
   <section class="movies-categories" id="category"></section>
 
@@ -23,6 +24,7 @@
     import { MovieCategory } from "./component/MovieCategory/script.js";
     import { DataProfil } from "./data/dataProfil.js";
     import { Favoris } from "./component/Favorite/script.js";
+    import { EnAvant } from "./component/MovieEnAvant/enAvant.js";
 
 
     window.C = {};
@@ -34,7 +36,14 @@
       V.renderNavBar("C.handlerMovies()", "C.handlerProfil()", profils);
       C.getAllMovies();
       C.getCategories();
+      document.querySelector("#laUne").style.display = "block";
+      C.enAvant();
     };
+
+    C.enAvant = async function () {
+      let data = await DataMovie.enAvant();
+      V.renderEnAvant(data);
+    }
 
     C.Accueil = function () {
         if (C.profil) {
@@ -201,6 +210,11 @@
       }
       content.innerHTML = formattedContent;
     };
+
+    V.renderEnAvant = function (data) {
+      let content = document.querySelector("#laUne");
+      content.innerHTML = EnAvant.format(data);
+    }
     C.start(); // Démarre l'application
   </script>
 </body>
