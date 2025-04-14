@@ -22,10 +22,9 @@
     import { MovieDetail } from "./component/MovieDetail/script.js";
     import { MovieCategory } from "./component/MovieCategory/script.js";
     import { DataProfil } from "./data/dataProfil.js";
+    import { Favoris } from "./component/Favorite/script.js";
 
-    // Controleur
-    // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-    // Une fois l'application terminée, on pourrait remettre let C.
+
     window.C = {};
 
     C.profil = null;
@@ -93,9 +92,6 @@
       }
       V.renderMovieCategory(categories);
     };
-
-
-
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};

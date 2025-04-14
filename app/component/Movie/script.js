@@ -13,6 +13,7 @@ Movie.format = function (movies) {
     movieHtml = movieHtml.replace("{{nom}}", movie.name);
     movieHtml = movieHtml.replace("{{affiche}}", movie.image);
     movieHtml = movieHtml.replace("{{onclick}}",`C.handlerDetail(${movie.id})`);
+    movieHtml = movieHtml.replace("{{onclickFavorite}}",`C.addToFavorite(${movie.id})`);
     html += movieHtml;
   });
 
