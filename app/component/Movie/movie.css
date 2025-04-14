@@ -52,6 +52,9 @@ body {
     height: 3.5rem;
     border-radius: 1rem;
 }
+.movie__favorite__container{
+    cursor: pointer;
+}
 .movie_favoris{
     display: flex;
     flex-direction: column;

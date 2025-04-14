@@ -43,11 +43,11 @@ function getAllMovies(){
  *
  * @return int Nombre de lignes affectées par l'insertion.
  */
-function addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age) {
+function addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age, $EnAvant) {
 
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-        $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
-                VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
+        $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age, EnAvant) 
+                VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age, :EnAvant)";
         $stmt = $cnx->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':year', $year);
@@ -58,6 +58,7 @@ function addMovie($name, $year, $length, $description, $director, $id_category, 
         $stmt->bindParam(':image', $image);
         $stmt->bindParam(':trailer', $trailer);
         $stmt->bindParam(':min_age', $min_age);
+        $stmt->bindParam(':EnAvant', $EnAvant);
 
         $stmt->execute();
 

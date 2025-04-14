@@ -37,8 +37,9 @@ function addController() {
   $image = $_REQUEST['image'];
   $trailer = $_REQUEST['trailer'];
   $min_age = $_REQUEST['min_age'];
+  $EnAvant = $_REQUEST['EnAvant'];
 
-  $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age);
+  $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age, $EnAvant);
 
   if ($ok != 0) {
       echo json_encode(["success" => true, "message" => "Film ajouté à la base de donnée"]);
