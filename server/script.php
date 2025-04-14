@@ -54,6 +54,14 @@ if ( isset($_REQUEST['todo']) ){
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
+    case 'deleteFavorite':
+      $data = deleteFavoriteController();
+      break;
+
+    case 'readFavorite' :
+      $data = readFavoriteController();
+      break;
+
     case 'addToFavorite' : 
       $data =  addToFavoriteController();
       break;

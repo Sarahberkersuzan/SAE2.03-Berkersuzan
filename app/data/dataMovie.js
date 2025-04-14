@@ -21,16 +21,16 @@ DataMovie.requestMoviesCategory = async function(){
     return category;
 }
 
-DataMovie.requestFavoris = async function (id_movie, id_profil) {
-    let answer = await fetch(HOST_URL + `/server/script.php?todo=addToFavorite&id_movie=`+id_movie +'&id_profil=' +id_profil);
-    let movies = await answer.json();
-    return movies;
+DataMovie.addFavorite = async function (id_profil, id_movie) {
+    let answer = await fetch(HOST_URL + `/server/script.php?todo=addToFavorite&id_profil=`+id_profil `&id_movie`+id_movie );
+    let data = await answer.json();
+    return data;
 }
 
-DataMovie.requestDeleteFavorite = async function (id_movie, id_profil) {
-    let answer = await fetch(HOST_URL + `/server/script.php?todo=deleteFavorite&id_movie=`+id_movie +'&id_profil=' +id_profil);
-    let movies = await answer.json();
-    return movies;
+DataMovie.deleteFavorite = async function (id_profil, id_movie) {
+    let answer = await fetch(HOST_URL + `/server/script.php?todo=deleteFavorite&id_profil=`+id_profil `&id_movie`+id_movie );
+    let data = await answer.json();
+    return data;
 }
 
 export {DataMovie};

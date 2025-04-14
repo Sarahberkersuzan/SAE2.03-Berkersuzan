@@ -130,10 +130,27 @@ function addToFavoriteController() {
     $id_movie = $_REQUEST['id_movie'];
     $id_profil = $_REQUEST['id_profil'];
 
-    if (empty($id_movie) || empty($id_profil)) {
-        return "Erreur : Tous les champs obligatoires doivent être remplis.";
+    if (isFavoris($id_movie, $id_profil)) {
+        return ["error" => "Le film est déjà dans vos favoris !"];
     }
 
     $ok = addToFavorite($id_movie, $id_profil);
     return $ok ? "Le film a été ajouté aux favoris." : "Erreur lors de l'ajout aux favoris.";
 }
+
+function readFavoriteController() {
+    $id_profil = $_REQUEST['id_profil'] ?? null;
+    $ok = readFavorite($id_profil);
+    return $ok ? $ok : [];
+  }
+
+  function deleteFavoriteController() {
+    $id_profil = $_REQUEST['id_profil'] ?? null;
+    $id_movie = $_REQUEST['id_movie'] ?? null;
+    $ok = deleteFavorite($id_movie, $id_profil);
+    if ($ok) {
+        return ["success" => "Le film à été suprimé des favoris."];
+    } else {
+        return ["error" => "Impossible de supprimer le film de vos favoris."];
+    }
+  }

@@ -178,3 +178,46 @@ function addToFavorite($id_movie, $id_profil) {
 
     return $stmt->rowCount();
 }
+
+function readFavorite($id_profil) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+  
+    $sql = "SELECT Movie.id, Movie.name, Movie.image 
+            FROM Favoris 
+            INNER JOIN Movie ON Favoris.id_movie = Movie.id 
+            WHERE Favoris.id_profil = :id_profil";
+  
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+    $stmt->execute();
+  
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+  }
+
+  function isFavoris($id_movie, $id_profil) {
+    try {
+            $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+            $sql = "SELECT COUNT(*) FROM Favoris WHERE id_movie = :id_movie AND id_profil = :id_profil";
+            $stmt = $cnx->prepare($sql);
+            $stmt->bindParam(':id_movie', $id_movie, PDO::PARAM_INT);
+            $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+            return $count > 0;
+        } catch (PDOException $e) {
+            error_log("Erreur SQL dans isFavoris : " . $e->getMessage());
+            return false;
+        }
+    }
+
+    function deleteFavorite($id_movie, $id_profil)
+    {
+        $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
+        $sql = 'DELETE FROM Favoris 
+        WHERE id_profil = :id_profil AND id_movie = :id_movie';
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_movie', $id_movie, PDO::PARAM_INT);
+        $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
