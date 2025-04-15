@@ -72,35 +72,34 @@
   }
 }
 
-/* Responsive (mobile) */
+
 @media (max-width: 640px) {
   .navbar {
-    flex-direction: row; /* Garder une disposition horizontale */
+    flex-direction: row; 
     align-items: center;
-    gap: 1rem; /* Diminuer l'espace entre les éléments */
-    padding: 0.5rem 1rem; /* Réduire les espacements */
+    gap: 1rem; 
+    padding: 0.5rem 1rem;
   }
 
   .navbar__list {
-    flex-direction: row; /* Maintenir les éléments en ligne */
+    flex-direction: row; 
     gap: 1rem;
-    flex-wrap: wrap; /* Permet aux éléments de se répartir correctement */
+    flex-wrap: wrap; 
     width: 100%;
     justify-content: flex-start;
   }
 
   .navbar__profil {
     gap: 0.5rem;
-    /* Ajuster la taille du profil si nécessaire */
   }
 
   .navbar__item {
     font-size: 0.9rem;
-    padding: 0.3rem 0.5rem; /* Réduire la taille des éléments de menu */
+    padding: 0.3rem 0.5rem; 
   }
 
   .navbar__label {
-    font-size: 0.75rem; /* Réduire la taille de la police des labels */
+    font-size: 0.75rem; 
   }
 
   .navbar__select {
@@ -110,13 +109,13 @@
 
   .navbar__image {
     width: 32px;
-    height: 32px; /* Réduire la taille de l'image du profil */
+    height: 32px; 
   }
 }
 
-/* Espace réservé pour le contenu */
+
 .main {
-  padding-top: 80px; /* Hauteur de la navbar, ajuste si besoin */
+  padding-top: 80px; 
 }
 
 

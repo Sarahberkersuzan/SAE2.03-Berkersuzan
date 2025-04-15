@@ -70,13 +70,13 @@
     };
 
     C.handlerMovies = function () {
-      C.getAllMovies(); // Recharger la liste des films
+      C.getAllMovies(); 
     };
 
     C.handlerProfil = async function () {
       const select = document.querySelector("#profil-select");
       if (select.value === "") {
-        C.profil = null; // Réinitialise le profil
+        C.profil = null; 
         document.querySelector("#content").innerHTML = "<p>Aucun profil sélectionné.</p>";
         return;
       }
@@ -162,41 +162,20 @@
           return;
         }
 
-        // Utilise maintenant Favoris.format
         content.innerHTML = Favoris.format(favoris);
       };
-    // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
-    /**
-     * V.renderNavBar
-     *
-     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-     * formaté par le composant NavBar.
-     */
     V.renderNavBar = function (handlerMovies, handlerProfil, profils) {
       let header = document.querySelector("#header");
       header.innerHTML = NavBar.format(handlerMovies, handlerProfil, profils);
     };
-    /**
-     * V.renderMovie
-     *
-     * Cette fonction est responsable de l'affichage des films.
-     * Elle sélectionne l'élément HTML avec l'ID "content" et y insère le contenu
-     * formaté par le composant Movie.
-     */
+
     V.renderMovie = function (data) {
       let content = document.querySelector("#content");
       content.innerHTML = Movie.format(data);
     };
-    /**
-     * V.renderMovieDetail
-     *
-     * Cette fonction est responsable de l'affichage des détails d'un film.
-     * Elle sélectionne l'élément HTML avec l'ID "detail" et y insère le contenu
-     * formaté par le composant MovieDetail.
-     */
+
     V.renderMovieDetail = function (data) {
       let content = document.querySelector("#content");
       content.innerHTML = MovieDetail.format(data);
@@ -215,7 +194,7 @@
       let content = document.querySelector("#laUne");
       content.innerHTML = EnAvant.format(data);
     }
-    C.start(); // Démarre l'application
+    C.start(); 
   </script>
 </body>
 

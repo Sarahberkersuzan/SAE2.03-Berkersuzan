@@ -9,6 +9,7 @@
 @import "../component/MovieDetail/moviedetail.css" layer(components);
 @import "../component/MovieCategory/style.css" layer(components);
 @import "../component/MovieEnAvant/style.css" layer(components);
+@import "../component/Favorite/style.css" layer(components);
 
 header{
     width: 100%;
