@@ -1,105 +1,90 @@
-.EnAvants{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 50rem;
-    width: 100%;
-    gap: 16px;
+.enAvant__container {
+  position: relative;
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+  height: auto; 
+  overflow: hidden;
+  gap: 2rem; 
+  padding: 2rem; 
 }
+
 .enAvant {
+  position: relative;
+  width: 100%; 
+  height: 60vh; 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 2.5rem;
-  margin: 3rem auto;
-  max-width: 30rem;
-  border-radius: 1rem;
-  background: linear-gradient(145deg, #1a1a1a, #222);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-  color: #fff;
-  transition: transform 0.3s ease, box-shadow 0.4s ease;
-  overflow: hidden;
-  position: relative;
+  justify-content: center;
+  padding: 2rem;
+  text-align: left;
+  z-index: 3;
+  border: 0.1rem solid var(--clr-bleu2); 
+  box-shadow: 0 0.2rem 0.6rem var(--color-black); 
+  border-radius: 0.5rem; 
+}
+
+.enAvant:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.enAvant img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  filter: brightness(0.5);
+  border-radius: 0.5rem; 
 }
 
 .enAvant::before {
   content: '';
   position: absolute;
-  top: -30%;
-  left: -30%;
-  width: 160%;
-  height: 160%;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-  z-index: 0;
-  pointer-events: none;
-  transform: rotate(15deg);
-}
-
-.enAvant:hover {
-  transform: scale(1.01);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-}
-
-.enAvant img {
+  top: 0;
+  left: 0;
   width: 100%;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 0.8rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-  z-index: 1;
-}
-
-.enAvant:hover img {
-  transform: scale(1.02);
-}
-
-.enAvant__title {
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: center;
-  color: #ff4e00;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-  margin-top: 4rem;
-  z-index: 1;
+  height: 100%;
+  background: linear-gradient(to right, var(--bleu-foncé) 10%, var(--transparent) 100%);
+  z-index: 2;
+  border-radius: 0.5rem; 
 }
 
 .enAvant__nom {
-  font-size: 1.6rem;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 1rem;
-  color: #f0f0f0;
-  z-index: 1;
+  font-size: 2.8rem; 
+  font-weight: bold;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  z-index: 3;
+  text-shadow: 0.06rem 0.06rem 0.25rem var(--color-black);
 }
 
 .enAvant__description {
-  font-size: 1.1rem;
-  text-align: center;
-  color: #b0b0b0;
-  line-height: 1.6;
-  max-width: 90%;
-  z-index: 1;
+  font-size: 1.4rem; 
+  color: var(--blanc-beige);
+  line-height: 1.8; 
+  z-index: 3;
+  max-width: 70%; 
+  text-align: left; 
+  text-shadow: 0.06rem 0.06rem 0.2rem var(--color-black); 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .enAvant {
-    padding: 1.5rem;
-    gap: 1rem;
-  }
-
-  .enAvant__title {
-    font-size: 1.6rem;
+    height: 50vh; 
   }
 
   .enAvant__nom {
-    font-size: 1.3rem;
+    font-size: 1.5rem; 
   }
 
   .enAvant__description {
-    font-size: 1rem;
+    font-size: 0.9rem; 
+    max-width: 200%; 
   }
 }
-
-  

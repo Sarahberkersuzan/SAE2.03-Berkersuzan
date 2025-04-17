@@ -7,9 +7,16 @@ let MovieCategory = {};
 
 MovieCategory.format = function (category) {
   let categoryHtml = template;
+
   categoryHtml = categoryHtml.replace("{{name}}", category.name);
 
-  let moviesListHtml = Movie.format(category.movie || []);
+  const uniqueId = `carousel-${category.name.replace(/\s+/g, "-").toLowerCase()}`;
+  categoryHtml = categoryHtml.replaceAll("{{id}}", uniqueId);
+
+  let moviesListHtml = "";
+  for (let movie of category.movie) {
+    moviesListHtml += Movie.format([movie]);
+  }
   categoryHtml = categoryHtml.replace("{{movie}}", moviesListHtml);
 
   return categoryHtml;

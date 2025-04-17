@@ -10,7 +10,6 @@
 
 <body>
   <header id="header"></header>
-  <h1 class="enAvant__title">A la une en ce moment</h1>
   <section class="EnAvants" id="laUne"></section>
   <section class="cards" id="content"></section>
   <section class="movies-categories" id="category"></section>
@@ -39,6 +38,28 @@
       document.querySelector("#laUne").style.display = "block";
       C.enAvant();
     };
+
+
+    C.scrollLeft = function (id) {
+  console.log(`Scrolling left for ID: ${id}`);
+  const track = document.getElementById(id);
+  if (!track) {
+    console.error(`Element with ID '${id}' not found.`);
+    return;
+  }
+  track.scrollBy({ left: -415.008, behavior: "smooth" });
+};
+
+C.scrollRight = function (id) {
+  console.log(`Scrolling right for ID: ${id}`);
+  const track = document.getElementById(id);
+  if (!track) {
+    console.error(`Element with ID '${id}' not found.`);
+    return;
+  }
+  track.scrollBy({ left: 415.008, behavior: "smooth" }); // Défiler vers la droite
+};
+
 
     C.enAvant = async function () {
       let data = await DataMovie.enAvant();

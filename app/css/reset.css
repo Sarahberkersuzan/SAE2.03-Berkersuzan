@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 *,
 *::after,
 *::before {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Montserrat, sans-serif;
   box-sizing: border-box;
 }
 *,
@@ -21,6 +22,7 @@ body, h1, h2, h3, h4, p,
 figure, blockquote, dl, dd {
   margin-block-end: 0;
   
+  
 }
 
 
@@ -32,9 +34,9 @@ ol[role='list'] {
 body {
   min-height: 100vh;
   line-height: 1.5;
-    margin: 0;
-    background-color: #0d0d0d;
-    color: #f0f0f0;
+  margin: 0;
+  background-color: #05061E;
+  color: #f0f0f0;
 }
 body::-webkit-scrollbar {
   display: none;
